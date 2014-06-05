@@ -1,5 +1,7 @@
 
-module.exports = function () {
+module.exports = function (opts) {
+	if (!opts) opts = {};
+	
 	var express = require('express');
 	var ejs = require('ejs-locals');
 	var cookieParser = require('cookie-parser');
