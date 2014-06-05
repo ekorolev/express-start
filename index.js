@@ -1,7 +1,9 @@
 
 module.exports = function (opts) {
-	if (!opts) opts = {};
-	
+	if (!opts) opts = {
+
+	};
+
 	var express = require('express');
 	var ejs = require('ejs-locals');
 	var cookieParser = require('cookie-parser');
@@ -9,10 +11,11 @@ module.exports = function (opts) {
 	var session = require('express-session');
 	var redis = require('redis').createClient();
 	var RedisStore = require('connect-redis')(session);
+
 	var sessionStore = new RedisStore({
-		client: opts.redis.client || redis,
-		port: opts.redis.port || 3020,
-		host: opts.redis.host || "localhost",
+		client: opts.redis ? opts.redis.client || redis : redis,
+		port: opts.redis ? opts.redis.port || 3020 : 3020,
+		host: opts.redis ? opts.redis.host || "localhost" : "localhost",
 	});
 
 	var app = express();
