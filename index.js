@@ -21,8 +21,9 @@ module.exports = function (opts) {
 	var app = express();
 
 	app.engine('ejs', ejs);
-	app.set('view engine', ejs);
-	app.use( express.static( __dirname + '../../public' ));
+	app.set('view engine', 'ejs');
+	app.set('views', __dirname + '/../../views');
+	app.use( express.static( __dirname + '/../../public' ));
 	app.use( bodyParser() );
 	app.use( cookieParser() );
 	app.use( session({ secret: "asdasd", store: sessionStore }));
