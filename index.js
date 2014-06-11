@@ -8,6 +8,7 @@ module.exports = function (opts) {
 	var ejs = require('ejs-locals');
 	var cookieParser = require('cookie-parser');
 	var bodyParser = require('body-parser');
+	var methodOverride = require('method-override');
 	var session = require('express-session');
 	var redis = require('redis').createClient();
 	var RedisStore = require('connect-redis')(session);
@@ -26,6 +27,7 @@ module.exports = function (opts) {
 	app.use( express.static( __dirname + '/../../public' ));
 	app.use( bodyParser() );
 	app.use( cookieParser() );
+	app.use( methodOverride() );
 	app.use( session({ secret: "asdasd", store: sessionStore }));
 
 	return app;
