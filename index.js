@@ -25,7 +25,7 @@ module.exports = function (opts) {
 	app.set('view engine', 'ejs');
 	app.set('views', __dirname + '/../../views');
 	app.use( express.static( __dirname + '/../../public' ));
-	app.use( bodyParser() );
+	app.use( bodyParser({ uploadDir: __dirname + '/../../public/upload'}) );
 	app.use( cookieParser() );
 	app.use( methodOverride() );
 	app.use( session({ secret: "asdasd", store: sessionStore }));
