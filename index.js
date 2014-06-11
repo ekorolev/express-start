@@ -12,6 +12,7 @@ module.exports = function (opts) {
 	var session = require('express-session');
 	var redis = require('redis').createClient();
 	var RedisStore = require('connect-redis')(session);
+	var multer = require('multer');
 
 	var sessionStore = new RedisStore({
 		client: opts.redis ? opts.redis.client || redis : redis,
@@ -25,7 +26,8 @@ module.exports = function (opts) {
 	app.set('view engine', 'ejs');
 	app.set('views', __dirname + '/../../views');
 	app.use( express.static( __dirname + '/../../public' ));
-	app.use( bodyParser({ uploadDir: __dirname + '/../../public/upload'}) );
+	app.use( bodyParser() );
+	app.use( multer({ dest: __dirname + '/../../public/upload' }));
 	app.use( cookieParser() );
 	app.use( methodOverride() );
 	app.use( session({ secret: "asdasd", store: sessionStore }));
